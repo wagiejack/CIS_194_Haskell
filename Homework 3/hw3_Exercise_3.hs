@@ -17,11 +17,13 @@ module Golf where
 
     --now for printing, we will take the maximum value and go from 0-9, if any of the frequency matches i.e >= to rowValue then we will print it, rowValue will keep decreasing with time, the no. of rows to iterate will be maximumValue
     histogram :: [Integer]->String
+    --unlines will add a new line at comma seperation, we add pattern+equals+numbers
     histogram n = unlines (stars ++ [baseline,numbers])
         where
             freqs = getFreqAll n
             max = maximum freqs
-            --generating the content, first we generate a list of rows which will range from max-1,then at each row, we will operate on frequencies
+            --generating the content, first we generate a list of rows which will range from max-1,then at each row, we will operate on each frequency and evaluate if it is >=row-value at that row, if yes then we can print * else space,
             stars = [  [if freq>=rows then '*' else ' '|freq<-freqs]| rows<-[max,max-1..1]]
             baseline = replicate 10 '='
             numbers = "0123456789"
+-- to get the output as in 
